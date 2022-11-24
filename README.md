@@ -5,10 +5,10 @@ Advanced video player based on video_player and Flexi with some customized contr
 <table>
    <tr>
       <td>
-         <img width="250px" src="https://raw.githubusercontent.com/Dharini17/flexivideoplayer/assets/potrait.png">
+         <img width="250px" src="https://raw.githubusercontent.com/Dharini17/flexivideoplayer/master/assets/potrait.png">
       </td>
       <td>
-         <img width="250px" src="https://raw.githubusercontent.com/Dharini17/flexivideoplayer/assets/landscap.png">
+         <img width="250px" src="https://raw.githubusercontent.com/Dharini17/flexivideoplayer/master/assets/landscap.png">
       </td>
     </tr>	
 </table>
