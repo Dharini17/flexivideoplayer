@@ -73,8 +73,6 @@ class _CupertinoControlsState extends State<CupertinoControls>
   void initState() {
     super.initState();
 
-
-
     notifier = Provider.of<PlayerNotifier>(context, listen: false);
 
     //set volumn value
