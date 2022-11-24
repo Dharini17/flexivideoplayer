@@ -33,12 +33,12 @@ class Flexi extends StatefulWidget {
   final FlexiController controller;
 
   @override
-  ChewieState createState() {
-    return ChewieState();
+  FlexiState createState() {
+    return FlexiState();
   }
 }
 
-class ChewieState extends State<Flexi> {
+class FlexiState extends State<Flexi> {
   bool _isFullScreen = false;
 
   bool get isControllerFullScreen => widget.controller.isFullScreen;
@@ -422,7 +422,7 @@ class FlexiController extends ChangeNotifier {
     List<OptionItem> flexiOptions,
   )? optionsBuilder;
 
-  /// Add your own additional options on top of chewie options
+  /// Add your own additional options on top of flexi options
   final List<OptionItem> Function(BuildContext context)? additionalOptions;
 
   /// Define here your own Widget on how your n'th subtitle will look like

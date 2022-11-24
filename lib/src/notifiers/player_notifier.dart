@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 ///
-/// The new State-Manager for Chewie!
+/// The new State-Manager for Flexi!
 /// Has to be an instance of Singleton to survive
-/// over all State-Changes inside chewie
+/// over all State-Changes inside flexi
 ///
 class PlayerNotifier extends ChangeNotifier {
   PlayerNotifier._(

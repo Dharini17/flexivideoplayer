@@ -10,7 +10,7 @@ class PlayerWithControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FlexiController chewieController = FlexiController.of(context);
+    final FlexiController flexiController = FlexiController.of(context);
 
     double calculateAspectRatio(BuildContext context) {
       final size = MediaQuery.of(context).size;
@@ -22,35 +22,35 @@ class PlayerWithControls extends StatelessWidget {
 
     Widget buildControls(
       BuildContext context,
-      FlexiController chewieController,
+      FlexiController flexiController,
     ) {
-      return chewieController.showControls
-          ? chewieController.customControls ?? const AdaptiveControls()
+      return flexiController.showControls
+          ? flexiController.customControls ?? const AdaptiveControls()
           : const SizedBox();
     }
 
     Widget buildPlayerWithControls(
-      FlexiController chewieController,
+      FlexiController flexiController,
       BuildContext context,
     ) {
       return Stack(
         children: <Widget>[
-          if (chewieController.placeholder != null)
-            chewieController.placeholder!,
+          if (flexiController.placeholder != null)
+            flexiController.placeholder!,
           InteractiveViewer(
-            transformationController: chewieController.transformationController,
-            maxScale: chewieController.maxScale,
-            panEnabled: chewieController.zoomAndPan,
-            scaleEnabled: chewieController.zoomAndPan,
+            transformationController: flexiController.transformationController,
+            maxScale: flexiController.maxScale,
+            panEnabled: flexiController.zoomAndPan,
+            scaleEnabled: flexiController.zoomAndPan,
             child: Center(
               child: AspectRatio(
-                aspectRatio: chewieController.aspectRatio ??
-                    chewieController.videoPlayerController.value.aspectRatio,
-                child: VideoPlayer(chewieController.videoPlayerController),
+                aspectRatio: flexiController.aspectRatio ??
+                    flexiController.videoPlayerController.value.aspectRatio,
+                child: VideoPlayer(flexiController.videoPlayerController),
               ),
             ),
           ),
-          if (chewieController.overlay != null) chewieController.overlay!,
+          if (flexiController.overlay != null) flexiController.overlay!,
           if (Theme.of(context).platform != TargetPlatform.iOS)
             Consumer<PlayerNotifier>(
               builder: (
@@ -72,12 +72,12 @@ class PlayerWithControls extends StatelessWidget {
                 ),
               ),
             ),
-          if (!chewieController.isFullScreen)
-            buildControls(context, chewieController)
+          if (!flexiController.isFullScreen)
+            buildControls(context, flexiController)
           else
             SafeArea(
               bottom: false,
-              child: buildControls(context, chewieController),
+              child: buildControls(context, flexiController),
             ),
         ],
       );
@@ -89,7 +89,7 @@ class PlayerWithControls extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: AspectRatio(
           aspectRatio: calculateAspectRatio(context),
-          child: buildPlayerWithControls(chewieController, context),
+          child: buildPlayerWithControls(flexiController, context),
         ),
       ),
     );

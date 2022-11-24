@@ -1,9 +1,10 @@
 import 'package:flexivideoplayer/flexivideoplayer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 class FlexiDemo extends StatefulWidget {
-  const FlexiDemo({
+   FlexiDemo({
     Key? key,
     this.title = 'Flexi Video Player Demo',
   }) : super(key: key);
@@ -17,10 +18,9 @@ class FlexiDemo extends StatefulWidget {
 }
 
 class _FlexiDemoState extends State<FlexiDemo> {
-  TargetPlatform? _platform;
+
   late VideoPlayerController _videoPlayerController1;
   FlexiController? _FlexiController;
-  int? bufferDelay;
 
   @override
   void initState() {
@@ -40,11 +40,6 @@ class _FlexiDemoState extends State<FlexiDemo> {
         VideoPlayerController.network("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
 
     await _videoPlayerController1.initialize();
-    _createFlexiController();
-
-  }
-
-  void _createFlexiController() {
 
     final subtitles = [
 
@@ -59,12 +54,14 @@ class _FlexiDemoState extends State<FlexiDemo> {
 
     _FlexiController = FlexiController(
 
+      deviceOrientationsOnEnterFullScreen: [DeviceOrientation.landscapeLeft,DeviceOrientation.landscapeRight],
+      deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+      allowFullScreen: true,
+      fullScreenByDefault: true,
       allowedScreenSleep: false,
       videoPlayerController: _videoPlayerController1,
       autoPlay: true,
       looping: true,
-      progressIndicatorDelay:
-      bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
 
       additionalOptions: (context) {
         return <OptionItem>[
@@ -146,57 +143,6 @@ class _FlexiDemoState extends State<FlexiDemo> {
             ],
           ),
         )
-      ),
-    );
-  }
-}
-
-class DelaySlider extends StatefulWidget {
-  const DelaySlider({Key? key, required this.delay, required this.onSave})
-      : super(key: key);
-
-  final int? delay;
-  final void Function(int?) onSave;
-  @override
-  State<DelaySlider> createState() => _DelaySliderState();
-}
-
-class _DelaySliderState extends State<DelaySlider> {
-  int? delay;
-  bool saved = false;
-
-  @override
-  void initState() {
-    super.initState();
-    delay = widget.delay;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    const int max = 1000;
-    return ListTile(
-      title: Text(
-        "Progress indicator delay ${delay != null ? "${delay.toString()} MS" : ""}",
-      ),
-      subtitle: Slider(
-        value: delay != null ? (delay! / max) : 0,
-        onChanged: (value) async {
-          delay = (value * max).toInt();
-          setState(() {
-            saved = false;
-          });
-        },
-      ),
-      trailing: IconButton(
-        icon: const Icon(Icons.save),
-        onPressed: saved
-            ? null
-            : () {
-                widget.onSave(delay);
-                setState(() {
-                  saved = true;
-                });
-              },
       ),
     );
   }

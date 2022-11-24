@@ -57,9 +57,9 @@ class _CupertinoControlsState extends State<CupertinoControls>
 
   Duration varDuration = Duration(milliseconds: 500);
 
-  // We know that _chewieController is set in didChangeDependencies
-  FlexiController get chewieController => _chewieController!;
-  FlexiController? _chewieController;
+  // We know that _flexiController is set in didChangeDependencies
+  FlexiController get flexiController => _flexiController!;
+  FlexiController? _flexiController;
 
   //custom value parameters ----------
 
@@ -100,10 +100,10 @@ class _CupertinoControlsState extends State<CupertinoControls>
     isPhone =  MediaQuery.of(context).size.width >= 768 ? false : true;
 
     if (_latestValue.hasError) {
-      return chewieController.errorBuilder != null
-          ? chewieController.errorBuilder!(
+      return flexiController.errorBuilder != null
+          ? flexiController.errorBuilder!(
               context,
-              chewieController.videoPlayerController.value.errorDescription!,
+              flexiController.videoPlayerController.value.errorDescription!,
             )
           : const Center(
               child: Icon(
@@ -165,7 +165,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
                               0.0,
                               notifier.hideStuff ? barHeight * 0.8 : 0.0,
                             ),
-                            child: _buildSubtitles(chewieController.subtitle!),
+                            child: _buildSubtitles(flexiController.subtitle!),
                           ),
                         _buildBottomBar(backgroundColor, iconColor, barHeight),
 
@@ -200,7 +200,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
                   //       0.0,
                   //       notifier.hideStuff ? barHeight * 0.8 : 0.0,
                   //     ),
-                  //     child: _buildSubtitles(chewieController.subtitle!),
+                  //     child: _buildSubtitles(flexiController.subtitle!),
                   //   ),
                   // _buildBottomBar(backgroundColor, iconColor, barHeight),
               //   ],
@@ -232,7 +232,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
                           0.0,
                           notifier.hideStuff ? barHeight * 0.8 : 0.0,
                         ),
-                        child: _buildSubtitles(chewieController.subtitle!),
+                        child: _buildSubtitles(flexiController.subtitle!),
                       ),
                     _buildBottomBar(backgroundColor, iconColor, barHeight),
                   ],
@@ -261,11 +261,11 @@ class _CupertinoControlsState extends State<CupertinoControls>
 
   @override
   void didChangeDependencies() {
-    final oldController = _chewieController;
-    _chewieController = FlexiController.of(context);
-    controller = chewieController.videoPlayerController;
+    final oldController = _flexiController;
+    _flexiController = FlexiController.of(context);
+    controller = flexiController.videoPlayerController;
 
-    if (oldController != chewieController) {
+    if (oldController != flexiController) {
       _dispose();
       _initialize();
     }
@@ -279,26 +279,26 @@ class _CupertinoControlsState extends State<CupertinoControls>
   ) {
     final options = <OptionItem>[];
 
-    if (chewieController.additionalOptions != null &&
-        chewieController.additionalOptions!(context).isNotEmpty) {
-      options.addAll(chewieController.additionalOptions!(context));
+    if (flexiController.additionalOptions != null &&
+        flexiController.additionalOptions!(context).isNotEmpty) {
+      options.addAll(flexiController.additionalOptions!(context));
     }
 
     return GestureDetector(
       onTap: () async {
         _hideTimer?.cancel();
 
-        if (chewieController.optionsBuilder != null) {
-          await chewieController.optionsBuilder!(context, options);
+        if (flexiController.optionsBuilder != null) {
+          await flexiController.optionsBuilder!(context, options);
         } else {
           await showCupertinoModalPopup<OptionItem>(
             context: context,
             semanticsDismissible: true,
-            useRootNavigator: chewieController.useRootNavigator,
+            useRootNavigator: flexiController.useRootNavigator,
             builder: (context) => CupertinoOptionsDialog(
               options: options,
               cancelButtonText:
-                  chewieController.optionsTranslation?.cancelButtonText,
+                  flexiController.optionsTranslation?.cancelButtonText,
             ),
           );
           if (_latestValue.isPlaying) {
@@ -339,8 +339,8 @@ class _CupertinoControlsState extends State<CupertinoControls>
       return const SizedBox();
     }
 
-    if (chewieController.subtitleBuilder != null) {
-      return chewieController.subtitleBuilder!(
+    if (flexiController.subtitleBuilder != null) {
+      return flexiController.subtitleBuilder!(
         context,
         currentSubtitle.first!.text,
       );
@@ -371,7 +371,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
     double barHeight,
   ) {
     return SafeArea(
-      bottom: chewieController.isFullScreen,
+      bottom: flexiController.isFullScreen,
       child: AnimatedOpacity(
         opacity: notifier.hideStuff ? 0.0 : 1.0,
         duration: varDuration,
@@ -390,7 +390,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
               child: Container(
                 height: barHeight,
                 color: backgroundColor,
-                child: chewieController.isLive
+                child: flexiController.isLive
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -410,11 +410,11 @@ class _CupertinoControlsState extends State<CupertinoControls>
                           _buildRemaining(iconColor),
                           _buildSubtitleToggle(iconColor, barHeight),
 
-                          if (chewieController.allowPlaybackSpeedChanging)
+                          if (flexiController.allowPlaybackSpeedChanging)
                             _buildSpeedButton(controller, iconColor, barHeight),
 
-                          // if (chewieController.additionalOptions != null &&
-                          //     chewieController
+                          // if (flexiController.additionalOptions != null &&
+                          //     flexiController
                           //         .additionalOptions!(context).isNotEmpty)
                           //   _buildOptionsButton(iconColor, barHeight),
 
@@ -452,7 +452,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
         padding: const EdgeInsets.only(left: 4.0, right: 8.0),
         margin: const EdgeInsets.only(right: 6.0),
         child: Icon(
-          chewieController.isFullScreen
+          flexiController.isFullScreen
                               ? Icons.fullscreen_exit_rounded
                               : Icons.fullscreen,
           color: iconColor,
@@ -486,7 +486,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
   //             color: backgroundColor,
   //             child: Center(
   //               child: Icon(
-  //                 chewieController.isFullScreen
+  //                 flexiController.isFullScreen
   //                     ? CupertinoIcons.arrow_down_right_arrow_up_left
   //                     : CupertinoIcons.arrow_up_left_arrow_down_right,
   //                 color: iconColor,
@@ -508,7 +508,24 @@ class _CupertinoControlsState extends State<CupertinoControls>
       ) {
     return GestureDetector(
       onTap: (){
-        Navigator.pop(context);
+
+        _flexiController!.exitFullScreen();
+        // Navigator.of(
+        //   context,
+        //   rootNavigator: _flexiController!.useRootNavigator,
+        // ).pop();
+         Navigator.pop(context);
+
+         /*
+         if (_isFullScreen) {
+      Wakelock.disable();
+      _navigatorState.maybePop();
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+          overlays: _betterPlayerConfiguration.systemOverlaysAfterFullScreen);
+      SystemChrome.setPreferredOrientations(
+          _betterPlayerConfiguration.deviceOrientationsAfterFullScreen);
+    }
+          */
       },
       child: Padding(
         padding: EdgeInsets.only(left: 10),
@@ -569,10 +586,10 @@ class _CupertinoControlsState extends State<CupertinoControls>
         children: [
 
           //device brightness
-          _chewieController!.isBrignessOptionDisplay && _chewieController!.isFullScreen ?
+          _flexiController!.isBrignessOptionDisplay && _flexiController!.isFullScreen ?
           Container(
             //(MediaQuery.of(context).orientation) == Orientation.portrait ? 50.0 : 47.0,
-           padding: _chewieController!.isFullScreen && !isPhone ? EdgeInsets.only(top: (MediaQuery.of(context).size.width/6),bottom: (MediaQuery.of(context).size.width/6)) : EdgeInsets.zero,
+           padding: _flexiController!.isFullScreen && !isPhone ? EdgeInsets.only(top: (MediaQuery.of(context).size.width/6),bottom: (MediaQuery.of(context).size.width/6)) : EdgeInsets.zero,
             child:Column(
               children: [
                 Icon(Icons.brightness_6,color: widget.iconColor,size: 18,),
@@ -675,13 +692,13 @@ class _CupertinoControlsState extends State<CupertinoControls>
           _buildSkipForward(widget.iconColor, (MediaQuery.of(context).orientation) == Orientation.portrait  ? 30.0 : 47.0),
 
           //device volumn
-          _chewieController!.isVolumnOptionDisplay && _chewieController!.isFullScreen  ?
+          _flexiController!.isVolumnOptionDisplay && _flexiController!.isFullScreen  ?
           Container(
             // height: (MediaQuery.of(context).orientation) == Orientation.portrait ? 50.0 : 47.0,
-              padding: _chewieController!.isFullScreen && !isPhone ? EdgeInsets.only(top: (MediaQuery.of(context).size.width/6),bottom: (MediaQuery.of(context).size.width/6)) : EdgeInsets.zero,
+              padding: _flexiController!.isFullScreen && !isPhone ? EdgeInsets.only(top: (MediaQuery.of(context).size.width/6),bottom: (MediaQuery.of(context).size.width/6)) : EdgeInsets.zero,
               child:Column(
                 children: [
-                  if (chewieController.allowMuting)
+                  if (flexiController.allowMuting)
                     _buildMuteNewButton(
                         controller,
                         widget.backgroundColor,
@@ -868,7 +885,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
 
   Widget _buildSubtitleToggle(Color iconColor, double barHeight) {
     //if don't have subtitle hiden button
-    if (chewieController.subtitle?.isEmpty ?? true) {
+    if (flexiController.subtitle?.isEmpty ?? true) {
       return const SizedBox();
     }
     return GestureDetector(
@@ -950,9 +967,9 @@ class _CupertinoControlsState extends State<CupertinoControls>
         final chosenSpeed = await showCupertinoModalPopup<double>(
           context: context,
           semanticsDismissible: true,
-          useRootNavigator: chewieController.useRootNavigator,
+          useRootNavigator: flexiController.useRootNavigator,
           builder: (context) => _PlaybackSpeedDialog(
-            speeds: chewieController.playbackSpeeds,
+            speeds: flexiController.playbackSpeeds,
             selected: _latestValue.playbackSpeed,
           ),
         );
@@ -1007,7 +1024,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
       child: Row(
         children: <Widget>[
 
-          if (chewieController.isFullScreen)
+          if (flexiController.isFullScreen)
             _buildBackButton(
               backgroundColor,
               iconColor,
@@ -1015,7 +1032,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
               buttonPadding,
             ),
 
-          // if (chewieController.allowFullScreen)
+          // if (flexiController.allowFullScreen)
           //   _buildExpandButton(
           //     backgroundColor,
           //     iconColor,
@@ -1024,12 +1041,12 @@ class _CupertinoControlsState extends State<CupertinoControls>
           //   ),
 
           const Spacer(),
-          if (chewieController.additionalOptions != null &&
-              chewieController
+          if (flexiController.additionalOptions != null &&
+              flexiController
                   .additionalOptions!(context).isNotEmpty)
             _buildOptionsButton(iconColor, barHeight),
           //mute button - old position
-          // if (chewieController.allowMuting)
+          // if (flexiController.allowMuting)
           //   _buildMuteButton(
           //     controller,
           //     backgroundColor,
@@ -1053,16 +1070,16 @@ class _CupertinoControlsState extends State<CupertinoControls>
   }
 
   Future<void> _initialize() async {
-    _subtitleOn = chewieController.subtitle?.isNotEmpty ?? false;
+    _subtitleOn = flexiController.subtitle?.isNotEmpty ?? false;
     controller.addListener(_updateState);
 
     _updateState();
 
-    if (controller.value.isPlaying || chewieController.autoPlay) {
+    if (controller.value.isPlaying || flexiController.autoPlay) {
       _startHideTimer();
     }
 
-    if (chewieController.showControlsOnInitialize) {
+    if (flexiController.showControlsOnInitialize) {
       _initTimer = Timer(const Duration(seconds: 2), () {
         setState(() {
           notifier.hideStuff = true;
@@ -1075,7 +1092,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
     setState(() {
       notifier.hideStuff = true;
 
-      chewieController.toggleFullScreen();
+      flexiController.toggleFullScreen();
       _expandCollapseTimer = Timer(const Duration(seconds: 2), () {
         setState(() {
           _cancelAndRestartTimer();
@@ -1104,7 +1121,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
 
             _startHideTimer();
           },
-          colors: chewieController.cupertinoProgressColors ??
+          colors: flexiController.cupertinoProgressColors ??
               FlexiProgressColors(
                 playedColor: const Color.fromARGB(
                   120,
@@ -1178,9 +1195,9 @@ class _CupertinoControlsState extends State<CupertinoControls>
   }
 
   void _startHideTimer() {
-    final hideControlsTimer = chewieController.hideControlsTimer.isNegative
+    final hideControlsTimer = flexiController.hideControlsTimer.isNegative
         ? FlexiController.defaultHideControlsTimer
-        : chewieController.hideControlsTimer;
+        : flexiController.hideControlsTimer;
     _hideTimer = Timer(hideControlsTimer, () {
       setState(() {
         notifier.hideStuff = true;
@@ -1199,10 +1216,10 @@ class _CupertinoControlsState extends State<CupertinoControls>
     if (!mounted) return;
 
     // display the progress bar indicator only after the buffering delay if it has been set
-    if (chewieController.progressIndicatorDelay != null) {
+    if (flexiController.progressIndicatorDelay != null) {
       if (controller.value.isBuffering) {
         _bufferingDisplayTimer ??= Timer(
-          chewieController.progressIndicatorDelay!,
+          flexiController.progressIndicatorDelay!,
           _bufferingTimerTimeout,
         );
       } else {
