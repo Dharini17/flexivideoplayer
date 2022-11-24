@@ -13,11 +13,13 @@ class AdaptiveControls extends StatelessWidget {
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
 
-    return  CupertinoControls(
+    return
+      CupertinoControls(
         backgroundColor:Color.fromRGBO(41, 41, 41, 0.5),
         iconColor: Colors.white,//fromARGB(255, 200, 200, 200),
       );
-      //  return const MaterialControls();
+      //  return
+      //    const MaterialControls();
 
       case TargetPlatform.macOS:
       case TargetPlatform.windows:

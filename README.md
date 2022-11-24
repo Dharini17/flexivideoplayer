@@ -1,16 +1,24 @@
 #flexivideoplayer
 
-Advanced video player based on video_player and Flexi with some customized controls
+Advanced video player based on video_player and Chewie with some customized controls
 
 <table>
    <tr>
       <td>
-         <img width="250px" src="https://raw.githubusercontent.com/Dharini17/flexivideoplayer/assets/potrait.png">
+         <img width="250px" src="https://raw.githubusercontent.com/Dharini17/flexivideoplayer/master/assets/potrait.png">
       </td>
       <td>
-         <img width="250px" src="https://raw.githubusercontent.com/Dharini17/flexivideoplayer/assets/landscap.png">
+         <img width="250px" src="https://raw.githubusercontent.com/Dharini17/flexivideoplayer/master/assets/landscap.png">
       </td>
-    </tr>	
+    </tr>
+<tr>
+  <td>
+         <img width="250px" src="https://raw.githubusercontent.com/Dharini17/flexivideoplayer/master/assets/loadingView.png">
+      </td>  
+      <td>
+         <img width="250px" src="https://raw.githubusercontent.com/Dharini17/flexivideoplayer/master/assets/errorView.png">
+      </td>     
+    </tr>
 </table>
 
 ## Features
@@ -32,13 +40,14 @@ dependencies:
 
 
 ```dart
-
 import 'package:flexivideoplayer/flexivideoplayer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 class FlexiDemo extends StatefulWidget {
-  const FlexiDemo({
+  FlexiDemo({
     Key? key,
     this.title = 'Flexi Video Player Demo',
   }) : super(key: key);
@@ -55,7 +64,7 @@ class _FlexiDemoState extends State<FlexiDemo> {
 
   late VideoPlayerController _videoPlayerController1;
   FlexiController? _FlexiController;
-
+  bool isSourceError = false;
 
   @override
   void initState() {
@@ -71,70 +80,100 @@ class _FlexiDemoState extends State<FlexiDemo> {
   }
 
   Future<void> initializePlayer() async {
-    _videoPlayerController1 =
-        VideoPlayerController.network("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
 
-    await _videoPlayerController1.initialize();
+    setState(() {
+      isSourceError = false;
+    });
+    try {
+      _videoPlayerController1 =
+          VideoPlayerController.network(
+              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
 
-    final subtitles = [
+      await _videoPlayerController1.initialize();
 
-      Subtitle(
-        index: 0,
-        start: const Duration(seconds: 0),
-        end: Duration(seconds: _videoPlayerController1.value.duration.inSeconds),
-        text: 'Whats up? :)',
 
-      ),
-    ];
+      final subtitles = [
 
-    _FlexiController = FlexiController(
+        Subtitle(
+          index: 0,
+          start: const Duration(seconds: 0),
+          end: Duration(seconds: _videoPlayerController1.value.duration.inSeconds),
+          text: 'Whats up? :)',
 
-      deviceOrientationsOnEnterFullScreen: [DeviceOrientation.landscapeLeft,DeviceOrientation.landscapeRight],
-      deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-      allowFullScreen: true,
-      fullScreenByDefault: true,
-      allowedScreenSleep: false,
-      videoPlayerController: _videoPlayerController1,
-      autoPlay: true,
-      looping: true,
-
-      additionalOptions: (context) {
-        return <OptionItem>[
-          OptionItem(
-            onTap: toggleVideo,
-            iconData: Icons.live_tv_sharp,
-            title: 'Toggle Video Src',
-          ),
-        ];
-      },
-      subtitle: Subtitles(subtitles),
-      subtitleBuilder: (context, dynamic subtitle) => Container(
-        padding: const EdgeInsets.all(10.0),
-        child: subtitle is InlineSpan
-            ? RichText(
-          text: subtitle,
-        )
-            : Text(
-          subtitle.toString(),
-          style: const TextStyle(color: Colors.white),
         ),
-      ),
+      ];
 
-      hideControlsTimer: const Duration(seconds: 3),
+      _FlexiController = FlexiController(
 
-      // Try playing around with some of these other options:
-      isBrignessOptionDisplay: true,
-      isVolumnOptionDisplay: true,
+        aspectRatio: 16 / 9,
+        deviceOrientationsOnEnterFullScreen: [
+          DeviceOrientation.landscapeLeft,
+          DeviceOrientation.landscapeRight
+        ],
+        deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+        allowFullScreen: true,
+        fullScreenByDefault: true,
+        allowedScreenSleep: false,
+        videoPlayerController: _videoPlayerController1,
+        autoPlay: true,
+        looping: true,
+        errorBuilder: (context, errorMessage) {
+          print("Error find : $errorMessage");
 
-      cupertinoProgressColors: FlexiProgressColors(
-        playedColor: Colors.red,
-        handleColor: Colors.red,
-        backgroundColor: Colors.grey,
-        bufferedColor: Colors.white.withOpacity(0.5),
-      ),
+          return Center(
+            child: Text(
+              errorMessage,
+              style: const TextStyle(color: Colors.white),
+            ),
+          );
+        },
+        additionalOptions: (context) {
+          return <OptionItem>[
+            OptionItem(
+              onTap: toggleVideo,
+              iconData: Icons.live_tv_sharp,
+              title: 'Toggle Video Src',
+            ),
+          ];
+        },
+        subtitle: Subtitles(subtitles),
+        subtitleBuilder: (context, dynamic subtitle) =>
+            Container(
+              padding: const EdgeInsets.all(10.0),
+              child: subtitle is InlineSpan
+                  ? RichText(
+                text: subtitle,
+              )
+                  : Text(
+                subtitle.toString(),
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
 
-    );
-    setState(() {});
+        hideControlsTimer: const Duration(seconds: 3),
+
+        // Try playing around with some of these other options:
+        isBrignessOptionDisplay: true,
+        isVolumnOptionDisplay: true,
+
+        cupertinoProgressColors: FlexiProgressColors(
+          playedColor: Colors.red,
+          handleColor: Colors.red,
+          backgroundColor: Colors.grey,
+          bufferedColor: Colors.white.withOpacity(0.5),
+        ),
+
+      );
+
+      setState(() {});
+    }
+    catch(exception){
+
+      setState(() {
+        isSourceError = true;
+      });
+      print("exception : $exception");
+    }
   }
 
   Future<void> toggleVideo() async {
@@ -155,24 +194,54 @@ class _FlexiDemoState extends State<FlexiDemo> {
           body: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                AspectRatio(aspectRatio: 16/9,
-                  child:
-                  _FlexiController != null
-                      &&
-                      _FlexiController!
-                          .videoPlayerController.value.isInitialized
-                      ? Flexi(
-                    controller: _FlexiController!,
-                  )
-                      : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        CircularProgressIndicator(),
-                        SizedBox(height: 20),
-                        Text('Loading'),
-                      ]
+
+                Container(
+                  color: Colors.black,
+                  child:  AspectRatio(aspectRatio: 16/9,
+                    child:
+
+                    isSourceError ?
+
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:  [
+                          Icon(CupertinoIcons.exclamationmark_circle,color: Colors.white,size: 30,),
+                          SizedBox(height: 10),
+                          Text('This video is unavailable',style: TextStyle(color: Colors.white,fontSize: 15),),
+
+                          InkWell(
+                            onTap: (){
+
+                              initializePlayer();
+                            },
+                            child: Container(
+                              height: 30,width: 100,alignment: Alignment.center,
+                              child: Text("Reload again",style: TextStyle(color: Colors.red,fontSize: 13),),
+                            ),
+                          )
+                        ]
+                    )
+
+                        :
+
+                    _FlexiController != null ?
+                    // &&
+                    //        _FlexiController!
+                    //            .videoPlayerController.value.isInitialized
+                    //        ?
+                    Flexi(
+                      controller: _FlexiController!,
+                    )
+                        : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          CircularProgressIndicator(strokeWidth: 2,color: Colors.red,),
+                          SizedBox(height: 20),
+                          Text('Loading',style: TextStyle(color: Colors.white,fontSize: 15),),
+                        ]
+                    ),
                   ),
-                ),
+                )
 
 
               ],
@@ -182,7 +251,6 @@ class _FlexiDemoState extends State<FlexiDemo> {
     );
   }
 }
-
 
 ```
 

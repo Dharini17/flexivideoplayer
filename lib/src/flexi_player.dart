@@ -290,7 +290,10 @@ class FlexiController extends ChangeNotifier {
           playbackSpeeds.every((speed) => speed > 0),
           'The playbackSpeeds values must all be greater than 0',
         ) {
+
+
     _initialize();
+
   }
 
   FlexiController copyWith({
@@ -554,6 +557,7 @@ class FlexiController extends ChangeNotifier {
   bool get isPlaying => videoPlayerController.value.isPlaying;
 
   Future _initialize() async {
+
     await videoPlayerController.setLooping(looping);
 
     if ((autoInitialize || autoPlay) &&

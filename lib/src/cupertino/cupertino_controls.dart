@@ -68,6 +68,10 @@ class _CupertinoControlsState extends State<CupertinoControls>
   double _setVolumeValue = 0;
 
   bool isPhone = true;
+  double varDeviceWidth = 0.0;
+
+  @override
+  VideoPlayerValue? get latestValue => _latestValue;
 
   @override
   void initState() {
@@ -97,22 +101,59 @@ class _CupertinoControlsState extends State<CupertinoControls>
   @override
   Widget build(BuildContext context) {
 
-    isPhone =  MediaQuery.of(context).size.width >= 768 ? false : true;
+    varDeviceWidth = MediaQuery.of(context).size.shortestSide;
+    isPhone = MediaQuery.of(context).size.shortestSide < 700 ? true : false;
 
     if (_latestValue.hasError) {
-      return flexiController.errorBuilder != null
-          ? flexiController.errorBuilder!(
-              context,
-              flexiController.videoPlayerController.value.errorDescription!,
-            )
-          : const Center(
-              child: Icon(
-                CupertinoIcons.exclamationmark_circle,
-                color: Colors.white,
-                size: 42,
-              ),
-            );
+      print("_latestValue : ${_latestValue.hasError}");
+      return flexiController.errorBuilder?.call(
+        context,
+        flexiController.videoPlayerController.value.errorDescription!,
+      ) ??
+          const Center(
+            child: Icon(
+              Icons.error,
+              color: Colors.white,
+              size: 42,
+            ),
+          );
     }
+    else{
+      print("_latestValue : ${_latestValue.hasError}");
+    }
+
+    // if (_latestValue.hasError == true) {
+    //
+    //   return Container(
+    //     color: Colors.black,
+    //     child: Center(
+    //                 child: Icon(
+    //                   CupertinoIcons.exclamationmark_circle,
+    //                   color: Colors.white,
+    //                   size: 42,
+    //                 ),
+    //               ),
+    //   );
+    // }
+
+    // if (_latestValue.hasError) {
+    //
+    //   return
+    //     flexiController.errorBuilder != null
+    //       ?
+    //
+    //   flexiController.errorBuilder!(
+    //           context,
+    //           flexiController.videoPlayerController.value.errorDescription!,
+    //         )
+    //       : const Center(
+    //           child: Icon(
+    //             CupertinoIcons.exclamationmark_circle,
+    //             color: Colors.white,
+    //             size: 42,
+    //           ),
+    //         );
+    // }
 
     final backgroundColor = widget.backgroundColor;
     final iconColor = widget.iconColor;
@@ -130,8 +171,8 @@ class _CupertinoControlsState extends State<CupertinoControls>
           child: Stack(
             children: [
 
-              Positioned(
-                top: 0,left: 0,right: 0,bottom: 0,
+              Positioned.fill(
+                //top: 0,left: 0,right: 0,bottom: 0,
                   child:Container(
                     color: Colors.black.withOpacity(notifier.hideStuff ? 0.0 : 0.5,),
                     child: Column(
@@ -155,7 +196,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
                                       )
 
                                 :
-                                _buildHitArea(),
+                                _buildHitArea(barHeight),
                         )
                         ),
 
@@ -559,7 +600,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
     );
   }
 
-  Widget _buildHitArea() {
+  Widget _buildHitArea(double barHeight) {
 
     final bool isFinished = _latestValue.position >= _latestValue.duration;
     final bool showPlayButton =
@@ -588,8 +629,9 @@ class _CupertinoControlsState extends State<CupertinoControls>
           //device brightness
           _flexiController!.isBrignessOptionDisplay && _flexiController!.isFullScreen ?
           Container(
+           height: (varDeviceWidth - (barHeight)) > 300.0 ? 300.0 : (varDeviceWidth - (barHeight)),
             //(MediaQuery.of(context).orientation) == Orientation.portrait ? 50.0 : 47.0,
-           padding: _flexiController!.isFullScreen && !isPhone ? EdgeInsets.only(top: (MediaQuery.of(context).size.width/6),bottom: (MediaQuery.of(context).size.width/6)) : EdgeInsets.zero,
+           //padding: _flexiController!.isFullScreen  && !isPhone ? EdgeInsets.only(top: 50,bottom: 50) : EdgeInsets.zero,
             child:Column(
               children: [
                 Icon(Icons.brightness_6,color: widget.iconColor,size: 18,),
@@ -694,8 +736,9 @@ class _CupertinoControlsState extends State<CupertinoControls>
           //device volumn
           _flexiController!.isVolumnOptionDisplay && _flexiController!.isFullScreen  ?
           Container(
+              height: (varDeviceWidth - (barHeight)) > 300.0 ? 300.0 : (varDeviceWidth - (barHeight)),
             // height: (MediaQuery.of(context).orientation) == Orientation.portrait ? 50.0 : 47.0,
-              padding: _flexiController!.isFullScreen && !isPhone ? EdgeInsets.only(top: (MediaQuery.of(context).size.width/6),bottom: (MediaQuery.of(context).size.width/6)) : EdgeInsets.zero,
+              //padding: _flexiController!.isFullScreen && !isPhone ? EdgeInsets.only(top: (MediaQuery.of(context).size.width/6),bottom: (MediaQuery.of(context).size.width/6)) : EdgeInsets.zero,
               child:Column(
                 children: [
                   if (flexiController.allowMuting)
