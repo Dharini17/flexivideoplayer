@@ -1,0 +1,26 @@
+name: flexivideoplayer
+description: Advanced video player based on video_player and Flexi. It's solves many typical use cases and it's easy to run.
+version: 0.0.2
+
+homepage: https://github.com/Dharini17/flexivideoplayer
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+  flutter: ">=2.2.3"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.5
+  provider: ^6.0.3
+  video_player: ^2.4.7
+  wakelock: ^0.6.2
+  volume_controller: ^2.0.4
+  screen_brightness: ^0.2.2
+
+dev_dependencies:
+  lint: ^1.8.2
+  flutter_test:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
