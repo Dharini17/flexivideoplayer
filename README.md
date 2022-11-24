@@ -89,7 +89,10 @@ class _FlexiDemoState extends State<FlexiDemo> {
 
     _FlexiController = FlexiController(
 
+      deviceOrientationsOnEnterFullScreen: [DeviceOrientation.landscapeLeft,DeviceOrientation.landscapeRight],
+      deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
       allowFullScreen: true,
+      fullScreenByDefault: true,
       allowedScreenSleep: false,
       videoPlayerController: _videoPlayerController1,
       autoPlay: true,
