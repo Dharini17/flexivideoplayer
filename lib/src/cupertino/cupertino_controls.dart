@@ -135,7 +135,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
               Positioned(
                 top: 0,left: 0,right: 0,bottom: 0,
                   child:Container(
-                    color: Colors.black.withOpacity(notifier.hideStuff ? 0.0 : 0.8,),
+                    color: Colors.black.withOpacity(notifier.hideStuff ? 0.0 : 0.5,),
                     child: Column(
                       children: [
 
@@ -145,7 +145,6 @@ class _CupertinoControlsState extends State<CupertinoControls>
                           barHeight,
                           buttonPadding,
                         ),
-
 
                         Expanded(
                             child:
