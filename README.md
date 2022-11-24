@@ -5,10 +5,10 @@ Advanced video player based on video_player and Flexi with some customized contr
 <table>
    <tr>
       <td>
-         <img width="250px" src="https://raw.githubusercontent.com/Dharini17/flexivideoplayer/master/assets/potrait.png">
+         <img width="250px" src="https://raw.githubusercontent.com/Dharini17/flexivideoplayer/assets/potrait.png">
       </td>
       <td>
-         <img width="250px" src="https://raw.githubusercontent.com/Dharini17/flexivideoplayer/master/assets/landscap.png">
+         <img width="250px" src="https://raw.githubusercontent.com/Dharini17/flexivideoplayer/assets/landscap.png">
       </td>
     </tr>	
 </table>
@@ -241,3 +241,5 @@ class _DelaySliderState extends State<DelaySlider> {
 ## Additional information
 
 This plugin is still in development.Please feel free to share if any bug found.Thank You.
+# flexivideoplayer
+# flexivideoplayer
