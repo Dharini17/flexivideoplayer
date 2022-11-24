@@ -241,5 +241,4 @@ class _DelaySliderState extends State<DelaySlider> {
 ## Additional information
 
 This plugin is still in development.Please feel free to share if any bug found.Thank You.
-# flexivideoplayer
-# flexivideoplayer
+
