@@ -541,13 +541,13 @@ class _CupertinoControlsState extends State<CupertinoControls>
   //   );
   // }
 
-  GestureDetector _buildBackButton(
+  Widget _buildBackButton(
       Color backgroundColor,
       Color iconColor,
       double barHeight,
       double buttonPadding,
       ) {
-    return GestureDetector(
+    return InkWell(
       onTap: (){
 
         _onExpandCollapse();
