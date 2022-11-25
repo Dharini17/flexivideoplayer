@@ -45,7 +45,7 @@ class _FlexiDemoState extends State<FlexiDemo> {
     try {
       _videoPlayerController1 =
           VideoPlayerController.network(
-              "https://commondatastorage.googleapis.com/gtv-videos-bucket /sample/BigBuckBunny.mp4");
+              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
 
       await _videoPlayerController1.initialize();
 

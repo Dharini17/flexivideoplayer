@@ -550,7 +550,9 @@ class _CupertinoControlsState extends State<CupertinoControls>
     return GestureDetector(
       onTap: (){
 
-        _flexiController!.exitFullScreen();
+        _onExpandCollapse();
+
+        // _flexiController!.exitFullScreen();
         // Navigator.of(
         //   context,
         //   rootNavigator: _flexiController!.useRootNavigator,
