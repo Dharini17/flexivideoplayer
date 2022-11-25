@@ -43,6 +43,13 @@ class _FlexiDemoState extends State<FlexiDemo> {
       isSourceError = false;
     });
     try {
+
+     // https://www.dailymotion.com/video/x8i4ibn?playlist=x6hzyp
+
+      //working player video url
+
+      //https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
+
       _videoPlayerController1 =
           VideoPlayerController.network(
               "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
@@ -76,6 +83,7 @@ class _FlexiDemoState extends State<FlexiDemo> {
         autoPlay: true,
         looping: true,
         errorBuilder: (context, errorMessage) {
+
           print("Error find : $errorMessage");
 
           return Center(

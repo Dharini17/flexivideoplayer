@@ -105,7 +105,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
     isPhone = MediaQuery.of(context).size.shortestSide < 700 ? true : false;
 
     if (_latestValue.hasError) {
-      print("_latestValue : ${_latestValue.hasError}");
+      // print("_latestValue : ${_latestValue.hasError}");
       return flexiController.errorBuilder?.call(
         context,
         flexiController.videoPlayerController.value.errorDescription!,
@@ -118,9 +118,9 @@ class _CupertinoControlsState extends State<CupertinoControls>
             ),
           );
     }
-    else{
-      print("_latestValue : ${_latestValue.hasError}");
-    }
+    // else{
+    //   //print("_latestValue : ${_latestValue.hasError}");
+    // }
 
     // if (_latestValue.hasError == true) {
     //
@@ -541,13 +541,13 @@ class _CupertinoControlsState extends State<CupertinoControls>
   //   );
   // }
 
-  GestureDetector _buildBackButton(
+  Widget _buildBackButton(
       Color backgroundColor,
       Color iconColor,
       double barHeight,
       double buttonPadding,
       ) {
-    return GestureDetector(
+    return InkWell(
       onTap: (){
 
         _onExpandCollapse();
