@@ -161,22 +161,21 @@ class _FlexiDemoState extends State<FlexiDemo> {
                  isSourceError ?
 
                         Column(
-                       mainAxisAlignment: MainAxisAlignment.center,
-                       children:  [
-                         Icon(CupertinoIcons.exclamationmark_circle,color: Colors.white,size: 30,),
-                         SizedBox(height: 10),
-                         Text('This video is unavailable',style: TextStyle(color: Colors.white,fontSize: 15),),
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         children:  [
+                           Icon(CupertinoIcons.exclamationmark_circle,color: Colors.white,size: 30,),
+                           SizedBox(height: 10),
+                           Text('This video is unavailable',style: TextStyle(color: Colors.white,fontSize: 15),),
 
-                         InkWell(
-                           onTap: (){
-
-                             initializePlayer();
-                           },
-                           child: Container(
-                             height: 30,width: 100,alignment: Alignment.center,
-                             child: Text("Reload again",style: TextStyle(color: Colors.red,fontSize: 13),),
-                           ),
-                         )
+                           InkWell(
+                             onTap: (){
+                               initializePlayer();
+                             },
+                             child: Container(
+                               height: 30,width: 100,alignment: Alignment.center,
+                               child: Text("Reload again",style: TextStyle(color: Colors.red,fontSize: 13),),
+                             ),
+                           )
                        ]
                    )
 
