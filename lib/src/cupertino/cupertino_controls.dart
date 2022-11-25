@@ -555,7 +555,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
         //   context,
         //   rootNavigator: _flexiController!.useRootNavigator,
         // ).pop();
-         Navigator.pop(context);
+        //  Navigator.pop(context);
 
          /*
          if (_isFullScreen) {

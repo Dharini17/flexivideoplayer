@@ -256,4 +256,4 @@ class _FlexiDemoState extends State<FlexiDemo> {
 
 ## Additional information
 
-This plugin is still in development.Please feel free to share if any bug found.Thank You.
+This plugin is still in development for adding more customized controls.Please feel free to share if any bug found.Thank You.
