@@ -546,10 +546,8 @@ class FlexiController extends ChangeNotifier {
     return flexiControllerProvider.controller;
   }
 
-
   final bool isBrignessOptionDisplay;
   final bool isVolumnOptionDisplay;
-
 
   bool _isFullScreen = false;
   bool get isFullScreen => _isFullScreen;
