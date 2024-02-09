@@ -1,6 +1,6 @@
 name: flexivideoplayer
-description: Advanced video player based on video_player and Chewie.
-version: 0.1.0
+description: Video player with support of brightness, volume, back from full screen,full screen playing
+version: 0.1.1
 
 homepage: https://github.com/Dharini17/flexivideoplayer
 
@@ -11,12 +11,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.5
-  provider: ^6.0.3
-  video_player: ^2.4.7
+  provider: ^6.1.1
+  video_player: ^2.8.2
   wakelock: ^0.6.2
-  volume_controller: ^2.0.4
-  screen_brightness: ^0.2.2
+  volume_controller: ^2.0.7
+  screen_brightness: ^1.0.0
 
 dev_dependencies:
   lint: ^1.8.2

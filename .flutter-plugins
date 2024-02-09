@@ -1,14 +1,14 @@
 # This is a generated file; do not edit or check into version control.
-screen_brightness=/Users/user/.pub-cache/hosted/pub.dev/screen_brightness-0.2.2/
-screen_brightness_android=/Users/user/.pub-cache/hosted/pub.dev/screen_brightness_android-0.1.0/
-screen_brightness_ios=/Users/user/.pub-cache/hosted/pub.dev/screen_brightness_ios-0.1.0/
-screen_brightness_macos=/Users/user/.pub-cache/hosted/pub.dev/screen_brightness_macos-0.1.0+1/
-screen_brightness_windows=/Users/user/.pub-cache/hosted/pub.dev/screen_brightness_windows-0.1.1/
-video_player=/Users/user/.pub-cache/hosted/pub.dev/video_player-2.5.1/
-video_player_android=/Users/user/.pub-cache/hosted/pub.dev/video_player_android-2.3.10/
-video_player_avfoundation=/Users/user/.pub-cache/hosted/pub.dev/video_player_avfoundation-2.3.8/
-video_player_web=/Users/user/.pub-cache/hosted/pub.dev/video_player_web-2.0.13/
-volume_controller=/Users/user/.pub-cache/hosted/pub.dev/volume_controller-2.0.6/
-wakelock=/Users/user/.pub-cache/hosted/pub.dev/wakelock-0.6.2/
-wakelock_macos=/Users/user/.pub-cache/hosted/pub.dev/wakelock_macos-0.4.0/
-wakelock_web=/Users/user/.pub-cache/hosted/pub.dev/wakelock_web-0.4.0/
+screen_brightness=/Users/mac/.pub-cache/hosted/pub.dev/screen_brightness-1.0.0/
+screen_brightness_android=/Users/mac/.pub-cache/hosted/pub.dev/screen_brightness_android-1.0.0/
+screen_brightness_ios=/Users/mac/.pub-cache/hosted/pub.dev/screen_brightness_ios-1.0.0/
+screen_brightness_macos=/Users/mac/.pub-cache/hosted/pub.dev/screen_brightness_macos-1.0.0/
+screen_brightness_windows=/Users/mac/.pub-cache/hosted/pub.dev/screen_brightness_windows-1.0.0/
+video_player=/Users/mac/.pub-cache/hosted/pub.dev/video_player-2.8.2/
+video_player_android=/Users/mac/.pub-cache/hosted/pub.dev/video_player_android-2.4.10/
+video_player_avfoundation=/Users/mac/.pub-cache/hosted/pub.dev/video_player_avfoundation-2.5.2/
+video_player_web=/Users/mac/.pub-cache/hosted/pub.dev/video_player_web-2.1.2/
+volume_controller=/Users/mac/.pub-cache/hosted/pub.dev/volume_controller-2.0.7/
+wakelock=/Users/mac/.pub-cache/hosted/pub.dev/wakelock-0.6.2/
+wakelock_macos=/Users/mac/.pub-cache/hosted/pub.dev/wakelock_macos-0.4.0/
+wakelock_web=/Users/mac/.pub-cache/hosted/pub.dev/wakelock_web-0.4.0/

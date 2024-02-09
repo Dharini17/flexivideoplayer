@@ -51,8 +51,7 @@ class _FlexiDemoState extends State<FlexiDemo> {
       //https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
 
       _videoPlayerController1 =
-          VideoPlayerController.network(
-              "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
+          VideoPlayerController.networkUrl(Uri.parse("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"));
 
       await _videoPlayerController1.initialize();
 
@@ -77,7 +76,7 @@ class _FlexiDemoState extends State<FlexiDemo> {
         ],
         deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
         allowFullScreen: true,
-        fullScreenByDefault: true,
+        fullScreenByDefault: false,
         allowedScreenSleep: false,
         videoPlayerController: _videoPlayerController1,
         autoPlay: true,
